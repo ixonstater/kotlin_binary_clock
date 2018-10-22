@@ -1,5 +1,6 @@
-import Clock.Time
+import Clock.Clock
 
 fun main(args: Array<String>){
-  var currentTime = Time()
+  val myClock = Clock()
+  myClock.runClock()
 }
