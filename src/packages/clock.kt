@@ -11,7 +11,7 @@ class Clock(){
   val updater = Updater()
   fun runClock(){
     currentTime.update()
-    updater.update(converter.convert(currentTime))
+    updater.simplePrintBinTime(converter.convert(currentTime))
   }
 }
 
@@ -44,6 +44,14 @@ class Converter(){
 
 class Updater(){
   fun update(binTime: Converter.BinaryTime){
-    
+
+  }
+  fun simplePrintBinTime(binTime: Converter.BinaryTime){
+    println("Hour tens: ${binTime.binTimeDigits[0].joinToString("")}")
+    println("Hour ones: ${binTime.binTimeDigits[1].joinToString("")}")
+    println("Minutes tens: ${binTime.binTimeDigits[2].joinToString("")}")
+    println("Minutes ones: ${binTime.binTimeDigits[3].joinToString("")}")
+    println("Seconds tens: ${binTime.binTimeDigits[4].joinToString("")}")
+    println("Seconds ones: ${binTime.binTimeDigits[5].joinToString("")}")
   }
 }
