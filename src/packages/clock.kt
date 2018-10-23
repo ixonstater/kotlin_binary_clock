@@ -9,7 +9,7 @@ class Clock(){
   var currentTime = Time()
   var previousTime = Time()
   val converter = Converter()
-  val updater = Updater()
+  val updater = UpdateDisplay()
   fun runClock(){
     timer(period = 1000){runHelper()}
   }
@@ -47,7 +47,7 @@ class Converter(){
   }
 }
 
-class Updater(){
+class UpdateDisplay(){
   fun update(binTime: Converter.BinaryTime){
 
   }
