@@ -2,7 +2,8 @@ package Clock
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.collections.map
-
+import kotlin.concurrent.timer
+import kotlin.concurrent.timerTask
 
 class Clock(){
   var currentTime = Time()
@@ -10,6 +11,10 @@ class Clock(){
   val converter = Converter()
   val updater = Updater()
   fun runClock(){
+    timer(period = 1000){runHelper()}
+  }
+  fun runHelper(){
+    previousTime = currentTime
     currentTime.update()
     updater.simplePrintBinTime(converter.convert(currentTime))
   }
