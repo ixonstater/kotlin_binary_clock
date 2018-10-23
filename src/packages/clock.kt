@@ -1,4 +1,5 @@
 package Clock
+import UpdateDisplay.UpdateDisplay
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.collections.map
@@ -7,16 +8,14 @@ import kotlin.concurrent.timerTask
 
 class Clock(){
   var currentTime = Time()
-  var previousTime = Time()
   val converter = Converter()
   val updater = UpdateDisplay()
   fun runClock(){
     timer(period = 1000){runHelper()}
   }
   fun runHelper(){
-    previousTime = currentTime
     currentTime.update()
-    updater.simplePrintBinTime(converter.convert(currentTime))
+    updater.update(converter.convert(currentTime))
   }
 }
 
@@ -44,19 +43,5 @@ class Converter(){
   fun intToBinary(num: Int) : CharArray{
     val retVal = num.toString(2).toCharArray()
     return retVal
-  }
-}
-
-class UpdateDisplay(){
-  fun update(binTime: Converter.BinaryTime){
-
-  }
-  fun simplePrintBinTime(binTime: Converter.BinaryTime){
-    println("Hour tens: ${binTime.binTimeDigits[0].joinToString("")}")
-    println("Hour ones: ${binTime.binTimeDigits[1].joinToString("")}")
-    println("Minutes tens: ${binTime.binTimeDigits[2].joinToString("")}")
-    println("Minutes ones: ${binTime.binTimeDigits[3].joinToString("")}")
-    println("Seconds tens: ${binTime.binTimeDigits[4].joinToString("")}")
-    println("Seconds ones: ${binTime.binTimeDigits[5].joinToString("")}")
   }
 }
