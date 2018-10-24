@@ -12,8 +12,6 @@ class UpdateDisplay(){
   val Cyan = "\u001b[36m"
   val White = "\u001b[37m"
   val Reset =  "\u001b[0m"
-  val Save = "\u001b[s"
-  val returnToSave = "\u001b[u"
   val escape = "\u001b["
   val upChar = "A"
   val downChar = "B"
@@ -21,16 +19,31 @@ class UpdateDisplay(){
   val leftChar = "D"
 
   fun update(binTime: BinaryTime){
-    this.printZero()
-    this.printOne()
+    this.saveSpot()
+    this.clearClock()
+    for (row in binTime.binTimeDigits){
+      this.printClockRow(row)
+    }
+    this.returnToSave()
   }
 
   fun clearClock(){
-
+    print("\u001b[0J")
   }
 
-  fun printClockRow(){
-
+  fun printClockRow(row: CharArray){
+    for(zero in 0 .. 3 - row.size){
+      this.printZero()
+    }
+    for(digit in row){
+      if (digit == '1'){
+        this.printOne()
+      } else {
+        this.printZero()
+      }
+    }
+    this.down(4)
+    this.left(30)
   }
 
   fun printZero(){
@@ -71,6 +84,13 @@ class UpdateDisplay(){
 
   fun right(spaces: Int){
     print(this.escape + spaces.toString() + this.rightChar)
+  }
+
+  fun saveSpot(){
+    print("\u001b[s")
+  }
+  fun returnToSave(){
+    print("\u001b[u")
   }
 
 }
