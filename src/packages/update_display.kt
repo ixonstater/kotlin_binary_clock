@@ -19,6 +19,7 @@ class UpdateDisplay(){
   val leftChar = "D"
 
   fun update(binTime: BinaryTime){
+    print(this.Blue)
     this.saveSpot()
     this.clearClock()
     for (row in binTime.binTimeDigits){
@@ -28,7 +29,7 @@ class UpdateDisplay(){
   }
 
   fun clearClock(){
-    print("\u001b[0J")
+    print("\u001b[2J")
   }
 
   fun printClockRow(row: CharArray){
