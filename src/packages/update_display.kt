@@ -30,6 +30,8 @@ class UpdateDisplay(){
 
   fun clearClock(){
     print("\u001b[2J")
+    this.up(100)
+    this.left(100)
   }
 
   fun printClockRow(row: CharArray){
